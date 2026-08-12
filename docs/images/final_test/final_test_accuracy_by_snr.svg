@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="560" viewBox="0 0 960 560">
+<rect width="100%" height="100%" fill="#ffffff"/>
+<style>text{font-family:Arial,sans-serif;fill:#1f2937}.axis{stroke:#374151;stroke-width:1.5}.grid{stroke:#e5e7eb;stroke-width:1}.label{font-size:13px}.title{font-size:22px;font-weight:700}.legend{font-size:14px;font-weight:600}</style>
+<text x="480" y="30" text-anchor="middle" class="title">TemporalCNN Final Test Accuracy by SNR</text>
+<line x1="90" y1="475.00" x2="920" y2="475.00" class="grid"/>
+<text x="78" y="479.00" text-anchor="end" class="label">0.0</text>
+<line x1="90" y1="391.00" x2="920" y2="391.00" class="grid"/>
+<text x="78" y="395.00" text-anchor="end" class="label">0.2</text>
+<line x1="90" y1="307.00" x2="920" y2="307.00" class="grid"/>
+<text x="78" y="311.00" text-anchor="end" class="label">0.4</text>
+<line x1="90" y1="223.00" x2="920" y2="223.00" class="grid"/>
+<text x="78" y="227.00" text-anchor="end" class="label">0.6</text>
+<line x1="90" y1="139.00" x2="920" y2="139.00" class="grid"/>
+<text x="78" y="143.00" text-anchor="end" class="label">0.8</text>
+<line x1="90" y1="55.00" x2="920" y2="55.00" class="grid"/>
+<text x="78" y="59.00" text-anchor="end" class="label">1.0</text>
+<line x1="90.00" y1="55" x2="90.00" y2="475" class="grid"/>
+<text x="90.00" y="499" text-anchor="middle" class="label">-20</text>
+<line x1="133.68" y1="55" x2="133.68" y2="475" class="grid"/>
+<line x1="177.37" y1="55" x2="177.37" y2="475" class="grid"/>
+<text x="177.37" y="499" text-anchor="middle" class="label">-16</text>
+<line x1="221.05" y1="55" x2="221.05" y2="475" class="grid"/>
+<line x1="264.74" y1="55" x2="264.74" y2="475" class="grid"/>
+<text x="264.74" y="499" text-anchor="middle" class="label">-12</text>
+<line x1="308.42" y1="55" x2="308.42" y2="475" class="grid"/>
+<line x1="352.11" y1="55" x2="352.11" y2="475" class="grid"/>
+<text x="352.11" y="499" text-anchor="middle" class="label">-8</text>
+<line x1="395.79" y1="55" x2="395.79" y2="475" class="grid"/>
+<line x1="439.47" y1="55" x2="439.47" y2="475" class="grid"/>
+<text x="439.47" y="499" text-anchor="middle" class="label">-4</text>
+<line x1="483.16" y1="55" x2="483.16" y2="475" class="grid"/>
+<line x1="526.84" y1="55" x2="526.84" y2="475" class="grid"/>
+<text x="526.84" y="499" text-anchor="middle" class="label">0</text>
+<line x1="570.53" y1="55" x2="570.53" y2="475" class="grid"/>
+<line x1="614.21" y1="55" x2="614.21" y2="475" class="grid"/>
+<text x="614.21" y="499" text-anchor="middle" class="label">4</text>
+<line x1="657.89" y1="55" x2="657.89" y2="475" class="grid"/>
+<line x1="701.58" y1="55" x2="701.58" y2="475" class="grid"/>
+<text x="701.58" y="499" text-anchor="middle" class="label">8</text>
+<line x1="745.26" y1="55" x2="745.26" y2="475" class="grid"/>
+<line x1="788.95" y1="55" x2="788.95" y2="475" class="grid"/>
+<text x="788.95" y="499" text-anchor="middle" class="label">12</text>
+<line x1="832.63" y1="55" x2="832.63" y2="475" class="grid"/>
+<line x1="876.32" y1="55" x2="876.32" y2="475" class="grid"/>
+<text x="876.32" y="499" text-anchor="middle" class="label">16</text>
+<line x1="920.00" y1="55" x2="920.00" y2="475" class="grid"/>
+<text x="920.00" y="499" text-anchor="middle" class="label">18</text>
+<line x1="90" y1="55" x2="90" y2="475" class="axis"/>
+<line x1="90" y1="475" x2="920" y2="475" class="axis"/>
+<text x="505.00" y="536" text-anchor="middle" class="label">SNR (dB)</text>
+<text x="24" y="265.00" text-anchor="middle" class="label" transform="rotate(-90 24 265.00)">Accuracy</text>
+<polyline points="90.00,434.78 133.68,435.80 177.37,436.05 221.05,426.13 264.74,412.89 308.42,374.96 352.11,311.58 395.79,249.47 439.47,203.15 483.16,167.76 526.84,142.56 570.53,130.09 614.21,132.38 657.89,128.82 701.58,127.80 745.26,130.85 788.95,127.80 832.63,130.85 876.32,128.31 920.00,132.13" fill="none" stroke="#047857" stroke-width="3"/>
+<circle cx="90.00" cy="434.78" r="3.5" fill="#047857"/>
+<circle cx="133.68" cy="435.80" r="3.5" fill="#047857"/>
+<circle cx="177.37" cy="436.05" r="3.5" fill="#047857"/>
+<circle cx="221.05" cy="426.13" r="3.5" fill="#047857"/>
+<circle cx="264.74" cy="412.89" r="3.5" fill="#047857"/>
+<circle cx="308.42" cy="374.96" r="3.5" fill="#047857"/>
+<circle cx="352.11" cy="311.58" r="3.5" fill="#047857"/>
+<circle cx="395.79" cy="249.47" r="3.5" fill="#047857"/>
+<circle cx="439.47" cy="203.15" r="3.5" fill="#047857"/>
+<circle cx="483.16" cy="167.76" r="3.5" fill="#047857"/>
+<circle cx="526.84" cy="142.56" r="3.5" fill="#047857"/>
+<circle cx="570.53" cy="130.09" r="3.5" fill="#047857"/>
+<circle cx="614.21" cy="132.38" r="3.5" fill="#047857"/>
+<circle cx="657.89" cy="128.82" r="3.5" fill="#047857"/>
+<circle cx="701.58" cy="127.80" r="3.5" fill="#047857"/>
+<circle cx="745.26" cy="130.85" r="3.5" fill="#047857"/>
+<circle cx="788.95" cy="127.80" r="3.5" fill="#047857"/>
+<circle cx="832.63" cy="130.85" r="3.5" fill="#047857"/>
+<circle cx="876.32" cy="128.31" r="3.5" fill="#047857"/>
+<circle cx="920.00" cy="132.13" r="3.5" fill="#047857"/>
+<line x1="730" y1="45" x2="758" y2="45" stroke="#047857" stroke-width="3"/>
+<text x="764" y="50" class="legend">Final test</text>
+</svg>

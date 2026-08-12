@@ -1,0 +1,47 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  offline-tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install project
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install .
+
+      - name: Run offline test suite
+        run: python -m unittest discover -s tests -v
+
+      - name: Parse all Python sources
+        run: |
+          python - <<'PY'
+          import ast
+          from pathlib import Path
+
+          files = [
+              *Path("src").rglob("*.py"),
+              *Path("scripts").rglob("*.py"),
+              *Path("tests").rglob("*.py"),
+          ]
+          for path in files:
+              ast.parse(path.read_text(encoding="utf-8"), filename=str(path))
+          print(f"parsed {len(files)} Python files")
+          PY

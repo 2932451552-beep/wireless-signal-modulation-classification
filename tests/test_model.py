@@ -1,0 +1,114 @@
+"""Tests for the first 1D CNN baseline."""
+
+import unittest
+
+import torch
+
+from signal_modulation.model import (
+    SimpleCNN1D,
+    TemporalCNN1D,
+    count_trainable_parameters,
+)
+
+
+class SimpleCNN1DTests(unittest.TestCase):
+    def test_output_shape_matches_batch_and_class_count(self) -> None:
+        model = SimpleCNN1D(num_classes=11)
+        inputs = torch.randn(8, 2, 128)
+
+        logits = model(inputs)
+
+        self.assertEqual(logits.shape, (8, 11))
+
+    def test_model_accepts_a_different_sequence_length(self) -> None:
+        model = SimpleCNN1D(num_classes=4)
+
+        logits = model(torch.randn(3, 2, 64))
+
+        self.assertEqual(logits.shape, (3, 4))
+
+    def test_invalid_channel_shape_is_rejected(self) -> None:
+        model = SimpleCNN1D(num_classes=3)
+
+        with self.assertRaisesRegex(ValueError, "shape"):
+            model(torch.randn(4, 1, 128))
+
+    def test_invalid_class_count_is_rejected(self) -> None:
+        with self.assertRaises(ValueError):
+            SimpleCNN1D(num_classes=1)
+
+    def test_cross_entropy_backward_produces_gradients(self) -> None:
+        torch.manual_seed(42)
+        model = SimpleCNN1D(num_classes=3)
+        inputs = torch.randn(6, 2, 128)
+        labels = torch.tensor([0, 1, 2, 0, 1, 2], dtype=torch.int64)
+
+        logits = model(inputs)
+        loss = torch.nn.functional.cross_entropy(logits, labels)
+        loss.backward()
+
+        self.assertTrue(torch.isfinite(loss))
+        self.assertIsNotNone(model.classifier.weight.grad)
+        self.assertGreater(float(model.classifier.weight.grad.abs().sum()), 0.0)
+
+    def test_parameter_count_is_small_and_non_zero(self) -> None:
+        model = SimpleCNN1D(num_classes=11)
+
+        parameter_count = count_trainable_parameters(model)
+
+        self.assertEqual(parameter_count, 11_499)
+
+
+class TemporalCNN1DTests(unittest.TestCase):
+    def test_output_shape_matches_batch_and_class_count(self) -> None:
+        model = TemporalCNN1D(num_classes=11)
+
+        logits = model(torch.randn(8, 2, 128))
+
+        self.assertEqual(logits.shape, (8, 11))
+
+    def test_model_rejects_a_different_sequence_length(self) -> None:
+        model = TemporalCNN1D(num_classes=4)
+
+        with self.assertRaisesRegex(ValueError, "configured sequence length"):
+            model(torch.randn(3, 2, 64))
+
+    def test_invalid_temporal_bin_count_is_rejected(self) -> None:
+        with self.assertRaises(ValueError):
+            TemporalCNN1D(num_classes=3, temporal_bins=0)
+
+    def test_too_short_sequence_is_rejected(self) -> None:
+        model = TemporalCNN1D(num_classes=3)
+
+        with self.assertRaisesRegex(ValueError, "length"):
+            model(torch.randn(4, 2, 3))
+
+    def test_incompatible_sequence_length_and_bins_are_rejected(self) -> None:
+        with self.assertRaisesRegex(ValueError, "divide"):
+            TemporalCNN1D(num_classes=3, sequence_length=126, temporal_bins=8)
+
+    def test_cross_entropy_backward_produces_gradients(self) -> None:
+        torch.manual_seed(42)
+        model = TemporalCNN1D(num_classes=3)
+        inputs = torch.randn(6, 2, 128)
+        labels = torch.tensor([0, 1, 2, 0, 1, 2], dtype=torch.int64)
+
+        loss = torch.nn.functional.cross_entropy(model(inputs), labels)
+        loss.backward()
+
+        self.assertTrue(torch.isfinite(loss))
+        final_layer = model.classifier[-1]
+        self.assertIsInstance(final_layer, torch.nn.Linear)
+        self.assertIsNotNone(final_layer.weight.grad)
+        self.assertGreater(float(final_layer.weight.grad.abs().sum()), 0.0)
+
+    def test_parameter_count_is_larger_but_still_compact(self) -> None:
+        model = TemporalCNN1D(num_classes=11)
+
+        parameter_count = count_trainable_parameters(model)
+
+        self.assertEqual(parameter_count, 224_587)
+
+
+if __name__ == "__main__":
+    unittest.main()
